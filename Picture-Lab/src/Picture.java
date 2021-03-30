@@ -77,7 +77,7 @@ public class Picture extends SimplePicture
 		}
   /** Method to set the blue to 0 */
 	public void zeroBlue()
-		{
+	{
 	    Pixel[][] pixels = this.getPixels2D();
 	    for (Pixel[] rowArray : pixels)
 	    	{
@@ -86,7 +86,7 @@ public class Picture extends SimplePicture
 	    		pixelObj.setBlue(0);
 	    		}
 	    	}
-		}
+	}
 	
 	public void keepOnlyBlue()
 	{
@@ -111,6 +111,39 @@ public class Picture extends SimplePicture
 	    		pixelObj.setRed(255 - pixelObj.getRed());
 	    		pixelObj.setGreen(255 - pixelObj.getGreen());
 	    		pixelObj.setBlue(255 - pixelObj.getBlue());
+	    		}
+	    	}
+	}
+	
+	public void grayscale()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+	    for (Pixel[] rowArray : pixels)
+	    	{
+	    	for (Pixel pixelObj : rowArray)
+	    		{
+	    			int colorAverage = (pixelObj.getBlue() + pixelObj.getGreen() + pixelObj.getRed()) / 3;
+		    		pixelObj.setRed(colorAverage);
+		    		pixelObj.setGreen(colorAverage);
+		    		pixelObj.setBlue(colorAverage);
+	    		}
+	    	}
+	}
+	
+	public void fixUnderwater()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+	    for (Pixel[] rowArray : pixels)
+	    	{
+	    	for (Pixel pixelObj : rowArray)
+	    		{
+	    			if(pixelObj.getBlue() > pixelObj.getGreen())
+	    				{
+	    					pixelObj.setBlue(2);
+	    					pixelObj.setRed(0);
+	    		    		pixelObj.setGreen(0);
+	    				}
+	    				
 	    		}
 	    	}
 	}
