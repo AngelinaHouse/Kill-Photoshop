@@ -200,6 +200,51 @@ public class Picture extends SimplePicture
 	    		}
 	    	}
 	}
+	
+	public void mirrorHorizontalBotToTop()
+		{
+		    Pixel[][] pixels = this.getPixels2D();
+		    Pixel leftPixel = null;
+		    Pixel rightPixel = null;
+		    int width = pixels[0].length;
+		    for (int row = 0; row < pixels.length; row++)
+		    	{
+		    	for (int col = 0; col < width; col++)
+		    		{
+			        leftPixel = pixels[row][col];
+			        rightPixel = pixels[pixels.length - row - 1 ][col];
+			        leftPixel.setColor(rightPixel.getColor());
+		    		}
+		    	}
+		}
+	
+	public void mirrorDiagonal()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+	    Pixel leftPixel = null;
+	    Pixel rightPixel = null;
+	    int width = pixels[0].length;
+	    int leng = 0;
+		   
+	    if(pixels[0].length > pixels.length)
+	    	{
+	    	leng = pixels.length;
+	    	}
+	    else
+	    	{
+	    	leng = pixels[0].length;
+	    	}
+	    
+	    for (int row = 0; row < leng; row++)
+	    	{
+	    	for (int col = 0; col < leng; col++)
+	    		{
+		        leftPixel = pixels[row][col];
+		        rightPixel = pixels[col][row];
+		        rightPixel.setColor(leftPixel.getColor());
+	    		}
+	    	}
+	}
   /** Mirror just part of a picture of a temple */
 	public void mirrorTemple()
 		{
@@ -222,6 +267,48 @@ public class Picture extends SimplePicture
 	    		}
 	    	}
 		}
+	
+	public void mirrorArms()
+	{
+		int mirrorPoint = 205;
+	    Pixel leftPixel = null;
+	    Pixel rightPixel = null;
+	    int count = 0;
+	    Pixel[][] pixels = this.getPixels2D();
+    
+    // loop through the rows
+	    for (int row = 167; row < mirrorPoint; row++)
+	    	{
+      // loop from 13 to just before the mirror point
+	    	for (int col = 104; col < 291; col++)
+	    		{
+		        leftPixel = pixels[row][col];      
+		        rightPixel = pixels[mirrorPoint - row + mirrorPoint][col];
+		        rightPixel.setColor(leftPixel.getColor());
+	    		}
+	    	}	
+	}
+	
+	public void mirrorGull()
+	{
+		int mirrorPoint = 340;
+	    Pixel leftPixel = null;
+	    Pixel rightPixel = null;
+	    int count = 0;
+	    Pixel[][] pixels = this.getPixels2D();
+    
+    // loop through the rows
+	    for (int row = 225; row < mirrorPoint; row++)
+	    	{
+      // loop from 13 to just before the mirror point
+	    	for (int col = 232; col < 366; col++)
+	    		{
+		        leftPixel = pixels[row][col];      
+		        rightPixel = pixels[row][mirrorPoint - col + mirrorPoint];
+		        rightPixel.setColor(leftPixel.getColor());
+	    		}
+	    	}	
+	}
   /** copy from the passed fromPic to the
     * specified startRow and startCol in the
     * current picture
